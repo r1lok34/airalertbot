@@ -1,5 +1,5 @@
 exports.sounds = {
-  trevoga: ["sounds/donbass.mp3"],
+  trevoga: ["sounds/donbass.mp3", "sounds/hamster.mp3"],
   otboi: ["sounds/nizky.mp3"],
 };
 
@@ -8,7 +8,7 @@ exports.channels = [
     serverName: "ДА ♥",
     channelId: "1225912115295162421",
     guildId: "1225912114850304082",
-    trevogaSoundId: "0",
+    trevogaSoundId: "1",
     otboiSoundId: "0",
   },
   {
