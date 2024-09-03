@@ -21,22 +21,26 @@ app.post("/hook", async (req, res) => {
   let status = false;
 
   if (req.body.regionId == "9") {
-    let dniproStatus = await fetch("https://api.ukrainealarm.com/api/v3/alerts/332", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: process.env.ALERT_TOKEN,
-      },
-    });
+    // let dniproStatus = await fetch("https://api.ukrainealarm.com/api/v3/alerts/332", {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: process.env.ALERT_TOKEN,
+    //   },
+    // });
 
-    if (dniproStatus.status != 200) {
-      console.error(dniproStatus);
-      res.status(200).end();
-      return;
-    }
+    // if (dniproStatus.status != 200) {
+    //   console.error(dniproStatus);
+    //   res.status(200).end();
+    //   return;
+    // }
 
-    dniproStatus = JSON.parse(await dniproStatus.text());
+    // dniproStatus = JSON.parse(await dniproStatus.text());
 
-    if (dniproStatus[0].activeAlerts > 0) {
+    // if (dniproStatus[0].activeAlerts > 0) {
+    //   status = true;
+    // }
+
+    if (req.body.status == "Activate") {
       status = true;
     }
 
@@ -45,7 +49,7 @@ app.post("/hook", async (req, res) => {
     });
   }
 
-  res.status(200).end(); // Responding is important
+  res.status(200).end();
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

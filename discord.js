@@ -5,11 +5,7 @@ const {
   joinVoiceChannel,
   AudioPlayerStatus,
 } = require("@discordjs/voice");
-const {
-  Client,
-  Events,
-  GatewayIntentBits,
-} = require("discord.js");
+const { Client, Events, GatewayIntentBits } = require("discord.js");
 const path = require("path");
 const token = process.env.DISCORD_TOKEN;
 
@@ -23,7 +19,9 @@ exports.client = new Client({
 });
 
 exports.connectToChannel = async (channel, sounds, trevoga) => {
-  const channelInstanse = await exports.client.channels.fetch(channel.channelId);
+  const channelInstanse = await exports.client.channels.fetch(
+    channel.channelId
+  );
 
   const connection = joinVoiceChannel({
     channelId: channel.channelId,
@@ -31,20 +29,12 @@ exports.connectToChannel = async (channel, sounds, trevoga) => {
     adapterCreator: channelInstanse.guild.voiceAdapterCreator,
   });
 
-  let soundId;
-
-  if (trevoga) {
-    soundId = channel.trevogaSoundId
-  } else {
-    soundId = channel.otboiSoundId;
-  }
-
   let filePath;
 
   if (trevoga) {
-    filePath = path.join(__dirname, sounds.trevoga[soundId]);
+    filePath = path.join(__dirname, sounds.trevoga[channel.trevogaSoundId]);
   } else {
-    filePath = path.join(__dirname, sounds.otboi[soundId]);
+    filePath = path.join(__dirname, sounds.otboi[channel.otboiSoundId]);
   }
 
   const resource = createAudioResource(filePath);
